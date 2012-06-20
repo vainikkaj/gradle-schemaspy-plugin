@@ -1,0 +1,2 @@
+gradle-schemaspy-plugin
+=======================
