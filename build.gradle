@@ -5,55 +5,12 @@ defaultTasks 'test', 'testReport'
 
 repositories { mavenCentral() }
 
-def spockVersion = "0.6-groovy-1.8"
+group = 'com.github.vainikkaj'
+version = '1.0-SNAPSHOT'
 
 dependencies {
-	groovy 'org.codehaus.groovy:groovy-all:1.8.6'
-	//spock pulls junit - testCompile 'junit:junit:4.10'
-	testCompile "org.spockframework:spock-core:$spockVersion"
+	compile gradleApi()
+	groovy localGroovy()
 }
 
-task 'bootstrap' (group: 'util', description : 'creates std project structure') << {
-	def sources = [
-		sourceSets.main,
-		sourceSets.test
-	]
-	sources*.allSource*.srcDirs.flatten().each { File srcDir ->
-		println "making $srcDir"
-		srcDir.mkdirs()
-	}
-}
-
-task 'console' (group: 'util', dependsOn: 'classes', type: JavaExec, description: 'starts Groovy Console') {
-	main = 'groovy.ui.Console'
-	classpath = sourceSets.main.runtimeClasspath
-}
-
-task 'testReport' (group: 'util', description: 'opens test report in brownser') << {
-	println "\tshowing report at $testReportDir"
-	"firefox $testReportDir/index.html".execute()
-}
-
-
-task 'showDocs' (group: 'util', description: 'shows various doc links') << { println '''
-GRADLE LINKS
-
-    http://gradle.codehaus.org/Cookbook
-    http://gradle.org/tutorial_using_tasks
-
-    http://tellurianring.com/wiki/gradle/templates
-    http://mrhaki.blogspot.com/search/label/Gradle%3AGoodness
-    http://evgeny-goldin.com/wiki/Gradle-CodeNarc-plugin
-
-SPOCK LINKS
-
-    http://code.google.com/p/spock/w/list
-    http://code.google.com/p/spock/wiki/GettingStarted#Eclipse''' }
-
-task 'showConfig' (group: 'util', description: 'shows main config') << {
-	println 'CURRENT SOURCE SETS\n'
-	sourceSets.all { println "\t$name" }
-	println '\nCURRENT MAIN/GROOVY SOURCE DIRS'
-	sourceSets.main.groovy.srcDirs.each { println "\t$it" }
-	//println "\n\tcurrent reports\n file://$buildDir/reports/codenarc.html"
-}
+task 'testReport' (group: 'util', description: 'opens test report in brownser') << {  "firefox $testReportDir/index.html".execute()   }
