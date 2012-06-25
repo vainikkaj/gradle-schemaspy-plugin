@@ -19,14 +19,13 @@ class HsqldbMemorySmokeTests {
 	public TemporaryFolder tempDir = new TemporaryFolder()
 
 	static String DB = 'myunittests'
-	static String URL = 'jdbc:hsqldb:mem:'+DB
+	static String URL = "jdbc:hsqldb:mem:$DB"
 	static String USER = 'sa'
 	static String PASSWORD = ''
 	static String DRIVER = 'org.hsqldb.jdbcDriver'
 
-	static String OUTPUT = 'build/tst'
-
 	def sql
+	def report
 
 	@Before
 	void 'setup database'(){
@@ -67,12 +66,12 @@ class HsqldbMemorySmokeTests {
 	void 'schemaspy can access in-memory db'(){
 		assertDatabaseState()
 
-		def dir = tempDir.newFolder()
+		def outputDir = tempDir.newFolder()
 		def conf = new Config()
 
 		conf.dbType = "hsqldb-mem"
 		conf.db = DB
-		conf.outputDir = dir
+		conf.outputDir = outputDir
 		conf.user = 'sa'
 		conf.password = ''
 		conf.schema = 'PUBLIC'
@@ -83,7 +82,9 @@ class HsqldbMemorySmokeTests {
 		 conf.setNumRowsEnabled false
 		 conf.setAdsEnabled false		
 		 */
-		def sa = new SchemaAnalyzer()
-		sa.analyze(conf)
+		
+		new SchemaAnalyzer().analyze(conf)		
+		report = new File(outputDir, 'index.html')
+		assert report.exists()
 	}
 }
