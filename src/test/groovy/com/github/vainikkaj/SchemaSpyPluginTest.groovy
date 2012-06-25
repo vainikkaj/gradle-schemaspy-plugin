@@ -19,6 +19,6 @@ class SchemaSpyPluginTest {
 
 	@Test
 	void 'plugin should add schemaspy task to project'() {
-		assertThat project.tasks.hello, is(SchemaSpyTask)
+		assertThat project.tasks.diagram, is(SchemaSpyTask)
 	}
 }

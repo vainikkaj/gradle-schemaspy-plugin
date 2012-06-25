@@ -5,11 +5,15 @@ import static org.junit.Assert.*;
 import net.sourceforge.schemaspy.Config
 import net.sourceforge.schemaspy.SchemaAnalyzer
 
+import org.gradle.api.Project
+import org.gradle.testfixtures.ProjectBuilder
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule;
 import org.junit.Test
 import org.junit.rules.TemporaryFolder;
+
+import com.github.vainikkaj.SchemaSpyTask
 
 import groovy.sql.Sql
 
@@ -25,7 +29,14 @@ class HsqldbMemorySmokeTests {
 	static String DRIVER = 'org.hsqldb.jdbcDriver'
 
 	def sql
-	def report
+	def task
+
+	@Before
+	void createTask(){
+		Project project = ProjectBuilder.builder().build()
+		project.ext.dburl = URL
+		task = project.task('mytaskname', type: SchemaSpyTask)
+	}
 
 	@Before
 	void 'setup database'(){
@@ -57,13 +68,13 @@ class HsqldbMemorySmokeTests {
 	}
 
 	@Test
-	void 'junit test can connect to in-memory db'(){
+	void 'junit can access in-memory db'(){
 		assertDatabaseState()
 		sql.eachRow("select * from LIDETAIL") {println "Gromit likes ${it.comment}" }
 	}
 
 	@Test
-	void 'schemaspy can access in-memory db'(){
+	void 'schemaspy api can access in-memory db'(){
 		assertDatabaseState()
 
 		def outputDir = tempDir.newFolder()
@@ -82,9 +93,15 @@ class HsqldbMemorySmokeTests {
 		 conf.setNumRowsEnabled false
 		 conf.setAdsEnabled false		
 		 */
-		
-		new SchemaAnalyzer().analyze(conf)		
-		report = new File(outputDir, 'index.html')
-		assert report.exists()
+
+		new SchemaAnalyzer().analyze(conf)
+		def tmpReport = new File(outputDir, 'index.html')
+		assert tmpReport.exists()
+	}
+
+	@Test
+	void 'schemaspy task can access in-memory db'(){
+		assertDatabaseState()
+		task.createSchemaSpyDiagram()
 	}
 }

@@ -41,6 +41,7 @@ class SchemaSpyConfigParser {
 		c.password = args.password ?: ''
 		def dbDir = c.host ? "${c.dbType}-${c.host}-${c.db}" : "${c.dbType}-${c.db}"
 		c.outputDir = new File("build/schemaspy/$dbDir")
+		c.schema = 'PUBLIC'
 		return c
 	}
 }

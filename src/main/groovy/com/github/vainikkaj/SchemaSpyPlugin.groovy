@@ -5,6 +5,6 @@ import org.gradle.api.Project
 
 class SchemaSpyPlugin implements Plugin<Project> {
 	void apply(Project target) {
-		target.task('hello', type: SchemaSpyTask)
+		target.task('diagram', type: SchemaSpyTask)
 	}
 }
