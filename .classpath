@@ -7,6 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
 	<classpathentry sourcepath="/home/jellybeam/.gradle/caches/artifacts-13/filestore/net.sourceforge.schemaspy/schemaspy/5.0.0/source/277e812296046eda0242df5c59048764c8fb148f/schemaspy-5.0.0-sources.jar" kind="lib" path="/home/jellybeam/.gradle/caches/artifacts-13/filestore/net.sourceforge.schemaspy/schemaspy/5.0.0/jar/6666f6861e63a6f3061cd68e402cea9b094d1e98/schemaspy-5.0.0.jar" exported="true"/>
 	<classpathentry kind="lib" path="/home/jellybeam/.gradle/caches/artifacts-13/filestore/org.hsqldb/hsqldb/2.2.8/jar/8231a3ff71ba5889f9e2d01ce13503cbdd4038e9/hsqldb-2.2.8.jar" exported="true"/>
+	<classpathentry sourcepath="/home/jellybeam/.gradle/caches/artifacts-13/filestore/com.h2database/h2/1.3.159/source/4d953bf765e8a13c7e06ca51165438338966c698/h2-1.3.159-sources.jar" kind="lib" path="/home/jellybeam/.gradle/caches/artifacts-13/filestore/com.h2database/h2/1.3.159/jar/dd89f939661eb5593909584e1c243db0c25de130/h2-1.3.159.jar" exported="true"/>
 	<classpathentry kind="lib" path="/opt/tools/gradle-1.0/lib/gradle-core-1.0.jar" exported="true"/>
 	<classpathentry kind="lib" path="/opt/tools/gradle-1.0/lib/asm-all-3.3.1.jar" exported="true"/>
 	<classpathentry kind="lib" path="/opt/tools/gradle-1.0/lib/ant-1.8.2.jar" exported="true"/>
