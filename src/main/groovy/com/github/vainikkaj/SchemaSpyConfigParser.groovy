@@ -7,6 +7,7 @@ class SchemaSpyConfigParser {
 	private static final String HSQLDB_MEM_REGEX = $/jdbc:hsqldb:mem:(.*)/$
 	private static final String HSQLDB_FILE_REGEX = $/jdbc:hsqldb:hsql://(.*)/(.*)/$
 	private static final String MYSQL_REGEX = $/jdbc:mysql://(.*)/(.*)/$
+	private static final String H2_FILE_REGEX = $/jdbc:h2:(.*)/$
 
 	Config parse(def args){
 		Config c = new Config()
@@ -30,6 +31,16 @@ class SchemaSpyConfigParser {
 				c.dbType = 'mysql'
 				dbURL.find(MYSQL_REGEX){url, host, dbName ->
 					c.host = host
+					c.db = dbName
+				}
+				break
+			case ~H2_FILE_REGEX:
+				c.dbType = 'h2'
+				dbURL.find(H2_FILE_REGEX){url, dbName ->
+					if(dbName.contains(';'))
+						dbName = dbName.replaceAll(';.*','')
+					if(dbName.contains('/'))
+						dbName = dbName.replaceAll('.*/','')
 					c.db = dbName
 				}
 				break

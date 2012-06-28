@@ -19,6 +19,8 @@ class SchemaSpyConfigParserTest {
 	def final hsqldbFile = ['url':"jdbc:hsqldb:hsql://localhost/$FAKE_DB"]
 
 	def final mysql = ['url':"jdbc:mysql://localhost/$FAKE_DB"]
+	def final h2absolutePath = ['url':"jdbc:h2:/somepath/$FAKE_DB;FILE_LOCK=NO"]
+	def final h2relativePath = ['url':"jdbc:h2:$FAKE_DB"]
 
 	SchemaSpyConfigParser parser
 	Config config
@@ -50,6 +52,14 @@ class SchemaSpyConfigParserTest {
 
 		parseConfig mysql
 		assert config.dbType == 'mysql'
+		assert config.db == FAKE_DB
+		
+		parseConfig h2absolutePath
+		assert config.dbType == 'h2'
+		assert config.db == FAKE_DB
+		
+		parseConfig h2relativePath
+		assert config.dbType == 'h2'
 		assert config.db == FAKE_DB
 	}
 
