@@ -2,16 +2,25 @@ package com.github.vainikkaj
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.plugins.Convention;
 
+/**
+ * @see Project
+ * @see Task
+ * @see Configuration
+ * @see Convention
+ */
 class SchemaSpyPlugin implements Plugin<Project> {
 
 	static final String CONFIG_NAME = 'schemaspy'
 	static final String TASK_GROUP = 'schemaspy'
 	static final String TASK_NAME = 'diagram'
 
-	/*
-	 * http://gradle.org/docs/current/javadoc/org/gradle/api/Project.html#task%28java.util.Map,%20java.lang.String%29
-	 * http://gradle.org/docs/current/javadoc/org/gradle/api/artifacts/ConfigurationContainer.html
+	/**
+	 * @see ConfigurationContainer
+	 * @see Project#task(java.util.Map, String)
 	 */
 	void apply(Project target) {
 		applyConfig target
