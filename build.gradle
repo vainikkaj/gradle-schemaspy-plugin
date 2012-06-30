@@ -16,11 +16,11 @@ group = 'com.github.vainikkaj'
 version = '0.1-SNAPSHOT'
 
 dependencies {
-	compile gradleApi()
 	groovy localGroovy()
+	compile gradleApi()
 	compile 'net.sourceforge.schemaspy:schemaspy:5.0.0'
-	compile 'org.hsqldb:hsqldb:2.2.8'
-	compile 'com.h2database:h2:1.3.159'
+	testRuntime 'org.hsqldb:hsqldb:2.2.8'
+	testRuntime 'com.h2database:h2:1.3.159'
 }
 
 task 'testReport' (group: 'util', description: 'opens test report in brownser') << {  "firefox $testReportDir/index.html".execute()   }
