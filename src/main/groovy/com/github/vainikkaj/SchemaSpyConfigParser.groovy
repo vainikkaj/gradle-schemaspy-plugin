@@ -45,7 +45,7 @@ class SchemaSpyConfigParser {
 				}
 				break
 			default:
-				throw new UnsupportedOperationException("$dbURL is not supported")
+				throw new UnsupportedOperationException("'$dbURL' is not supported jdbc url")
 		}
 
 		c.user = args.user ?: 'sa'

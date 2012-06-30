@@ -39,6 +39,15 @@ class SchemaSpyConfigParserTest {
 	void 'empty args shoud throw exception'(){
 		parseConfig()
 	}
+	
+	@Test
+	void 'error messege should have descriptive text'(){
+		try {
+			parseConfig()
+		} catch (Exception e) {
+			assert e.message == /'null' is not supported jdbc url/
+		}
+	}
 
 	@Test
 	void 'db specific config should be determined from jdbc url'(){
