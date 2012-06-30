@@ -8,6 +8,10 @@ repositories {
 	maven { url "https://oss.sonatype.org/content/groups/public" }
 }
 
+uploadArchives {
+	repositories { flatDir { dirs localGradleRepo } }
+}
+
 group = 'com.github.vainikkaj'
 version = '1.0-SNAPSHOT'
 
