@@ -3,14 +3,35 @@ apply plugin: 'eclipse'
 
 defaultTasks 'test', 'testReport'
 
-repositories { mavenCentral() }
+repositories {
+	mavenCentral()
+	maven { url "https://oss.sonatype.org/content/groups/public" }
+}
+
+uploadArchives {
+	repositories { flatDir { dirs localGradleRepo } }
+}
 
 group = 'com.github.vainikkaj'
-version = '1.0-SNAPSHOT'
+version = '0.1-SNAPSHOT'
 
 dependencies {
-	compile gradleApi()
 	groovy localGroovy()
+	compile gradleApi()
+	compile 'net.sourceforge.schemaspy:schemaspy:5.0.0'
+	testRuntime 'org.hsqldb:hsqldb:2.2.8'
+	testRuntime 'com.h2database:h2:1.3.159'
 }
 
 task 'testReport' (group: 'util', description: 'opens test report in brownser') << {  "firefox $testReportDir/index.html".execute()   }
+
+groovydoc {
+	docTitle = "gradle schemaspy plugin $version"
+	header = docTitle
+	windowTitle = docTitle
+	use = true
+	link 'http://download.oracle.com/javase/6/docs/api/', 'java.'
+	link 'http://groovy.codehaus.org/api/', 'groovy.', 'org.codehaus.groovy.'
+	link 'http://gradle.org/docs/current/javadoc', 'org.gradle.'
+	groovyClasspath = configurations.compile
+}

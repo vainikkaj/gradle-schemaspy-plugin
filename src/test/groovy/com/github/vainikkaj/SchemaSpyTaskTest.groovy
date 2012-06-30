@@ -1,8 +1,5 @@
 package com.github.vainikkaj;
 
-import static org.junit.Assert.*
-import static org.hamcrest.CoreMatchers.*
-
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
@@ -15,11 +12,13 @@ class SchemaSpyTaskTest {
 	@Before
 	void createTask(){
 		Project project = ProjectBuilder.builder().build()
+		project.ext.hello = 'world'
 		task = project.task('mytaskname', type: SchemaSpyTask)
 	}
 
 	@Test
-	void canAddTaskToProject() {
-		assertThat task.greeting, is('hello from schemaspy')
+	void 'task can access project properties'() {
+		task.project.properties.sort().each{println it}
+		assert task.project.properties.hello == 'world'
 	}
 }
