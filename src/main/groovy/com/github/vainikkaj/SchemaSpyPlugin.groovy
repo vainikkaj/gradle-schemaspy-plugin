@@ -3,8 +3,6 @@ package com.github.vainikkaj
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.artifacts.Configuration
-import org.gradle.api.plugins.Convention;
 
 /**
  * @see Project
@@ -28,17 +26,17 @@ class SchemaSpyPlugin implements Plugin<Project> {
 	}
 
 	private void applyConfig(project){
-		def config = project.configurations.add(CONFIG_NAME)
-		config.visible = false
-		config.transitive = true
-		config.description = 'Classpath for generating schemaspy diagrams'
+		project.configurations.add(CONFIG_NAME){
+			visible = false
+			transitive = true
+			description = 'Classpath for generating schemaspy diagrams'
+		}
 	}
 
 	private void applyTasks(project){
-		def taskArgs = [
-					type: SchemaSpyTask,
-					group: TASK_GROUP,
-					description: 'creates schemaspy diagram' ]
-		project.task taskArgs, TASK_NAME
+		project.task(TASK_NAME, type: SchemaSpyTask){
+			group = TASK_GROUP
+			description = 'creates schemaspy diagram'
+		}
 	}
 }
